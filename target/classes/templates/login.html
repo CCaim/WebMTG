@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<div th:insert="librerias::librerias"></div>
+
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<div th:insert="top::top"></div>
+		</header>
+	</div>
+	<div class="row">
+		<div class="col-4 mt-5 m-auto">
+			<h1 class="h3 text-grey-900">Log in</h1>
+			<div th:if="${param.error}">
+				<p class="alert alert-danger btn-sm m-2">Usuarie o contraseña incorrectos</p>
+			</div>
+			<div th:if="${param.exito}">
+				<p class="alert alert-info btn-sm m-2">Logueado Correctamente</p>
+			</div>
+			<form method="POST" action="/login">
+				<div class="form-row">
+					<div class="form-group col-8">
+						<label for="inputnombre">Usuarie</label>
+						<input placeholder="Usuarie" type="text" id="username" name="username" required="true"
+							class="form-control text-grey">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-8">
+						<label for="pass">Contraseña</label>
+						<div class="input-group" id="show_hide_password">
+							<input placeholder="Contraseña" type="password" id="password" name="password" required="true"
+								class="form-control text-grey-900">
+							<div class="input-group-text">
+								<a href=""><i class="fa fa-eye-slash"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-row m-auto">
+					<input type="submit" value="Acceder" class="btn btn-primary float-right mt-3">
+				</div>
+
+				<div class="form-row m-auto">
+					<br> <a href="/forgot" class="float-left mt-5 mr-3"> ¿Has olvidado tu contraseña?</a>
+				</div>
+
+				<div th:unless="${param.exito}">
+					<div class="row">
+						<div class="col-4 mt-5 m-auto">
+							<div class="form-group col-8">
+								<label for="inputSinRegistro">¿Aún no tienes cuenta?</label>
+								<a class="btn btn-primary float-riht mt-3 mr-3" th:href="@{/usuarios/registro}">
+									Registrate</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

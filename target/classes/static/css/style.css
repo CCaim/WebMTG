@@ -1,0 +1,269 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.menu-superior{
+    background-color: burlywood;
+    display: flex;
+    width: auto;
+    height: 50px;
+    font-size: 30px;
+        align-items: center;
+    justify-content: space-around;
+}
+.logo:hover{
+    cursor: pointer;
+    
+}
+a {
+  color: black;
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+
+.menu{
+    width: auto;
+    height: 50px;
+    color: black;
+    text-decoration: none;
+}
+.menu:hover{
+    cursor: pointer;
+    background-color: rgb(122, 96, 61);
+}
+.portada-mazos{
+    background-image: url(https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/hc_1440x810/public/media/image/2016/05/593510-magic-gathering-mejores-cartas.jpg?itok=sNxdJVBa);
+    background-size: cover;
+    width: auto;
+    height: 700px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.preview{
+    
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    width: 60%;
+    height: 500px;
+    font-size: 40px
+    
+}
+.mazos{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 200px;
+    gap: 40px;
+    
+}
+
+.preview-mazo1{
+    background-image: url(https://images1.mtggoldfish.com/featured_images/1854/ld196_81hixv845z.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 200px;
+    grid-column: 1/2;
+    grid-row: 3/3;
+    border: 3px solid burlywood;
+}
+.preview-mazo2{
+    background-image: url(https://scg-static.starcitygames.com/articles/2021/05/cba0b66e-1381.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 200px;
+    grid-column: 2/3;
+    grid-row: 3/3;
+    border: 3px solid burlywood;
+}
+.preview-mazo3{
+    background-image: url(https://cdn.cardsrealm.com/images/cartas/neo-kamigawa--neon-dynasty/en/crop-back/fable-of-the-mirror-breaker--reflection-of-kiki-jiki-465.jpeg?8612);
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 200px;
+    grid-column: 3/4;
+    grid-row: 3/3;
+    border: 3px solid burlywood;
+}
+.preview-mazo4{
+    background-image: url(https://cdna.artstation.com/p/assets/images/images/018/950/898/large/dmitry-burmak-mtg-19m20-colossushammer-f.jpg?1561390041);
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 200px;
+    grid-column: 4/5;
+    grid-row: 3/3; 
+    border: 3px solid burlywood;
+}
+.portada-cartas{
+    background-image: url(https://www.mtgnexus.com/img/gallery/3790-zhalfirin-void.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: auto;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.cartas-populares{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.titulo2{
+    font-size: 50px ;
+}
+.carta1{
+    background-image: url(https://scg-static.starcitygames.com/articles/2021/05/cba0b66e-1381.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 300px;
+    height: 200px;
+    animation: carta1 20s infinite linear;
+    border-radius: 10px;
+}
+.carta2{
+    background-image: url(https://cdna.artstation.com/p/assets/images/images/018/950/898/large/dmitry-burmak-mtg-19m20-colossushammer-f.jpg?1561390041);
+    background-size: cover;
+    background-position: center;
+    width: 300px;
+    height: 200px;
+    animation: carta2 20s infinite linear;
+    border-radius: 10px;
+}
+.carta3{
+    background-image: url(https://static.cardkingdom.com/images/magic-the-gathering/art-series-zendikar-rising/omnath-locus-of-creation-art-card-not-tournament-legal-14833.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 300px;
+    height: 200px;
+    animation: carta3 20s infinite linear;
+    border-radius: 10px;
+}
+
+@keyframes carta1 {
+    
+    50%{background-image: url(https://quietspeculation.com/wp-content/uploads/2015/03/thoughtsieze.jpg)}
+   
+}
+@keyframes carta2 {
+    
+    50%{background-image: url(https://i.pinimg.com/736x/9a/c8/b3/9ac8b3f184e642391f701d16dc19754b--character-portraits-the-gathering.jpg)}
+   
+}
+@keyframes carta3 {
+    
+    50%{background-image: url(https://www.hipstersofthecoast.com/wp-content/uploads/2020/08/teferi-time-raveler-banned-in-brawl.jpg)}
+   
+}
+
+.portada-noticias{
+    background-image: url(https://i.pinimg.com/originals/e4/88/f1/e488f13c679b495ac46d48a62fdc9c10.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: auto;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+.noticia1{
+    
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.noticia2{
+    
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.noticia3{
+    
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.foto-noticia1{
+    background-image: url(https://legacyeuropeantour.com/wp-content/uploads/2022/10/GOQBCN.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 500px;
+    height: 300px;
+}
+.foto-noticia2{
+    background-image: url(https://media.wizards.com/2022/images/daily/2FQgt9tsRFsL.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 500px;
+    height: 300px;
+}
+.foto-noticia3{
+    background-image: url(https://images.ctfassets.net/s5n2t79q9icq/1qqHUJ9cKYenQosEqhXIPD/968f0dfadd6c9b3841beb7a93058e210/en_articles_archive_magic-digital_mtg-arena-announcements-september-14-2022-meta-image.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 500px;
+    height: 300px;
+}
+.texto-noticia{
+    font-size: 30px;
+    color: aliceblue;
+}
+.redactores{
+    background-color: white;
+    height: 400px;
+    width: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.redactor{
+    height: 400px;
+    width: 600px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+}
+.foto1{
+    background-image: url(https://thumbs.dreamstime.com/b/mujer-gris-del-placeholder-de-la-foto-persona-131683029.jpg);
+    height: 400px;
+    width: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.foto2{
+    background-image: url(https://thumbs.dreamstime.com/b/hombre-gris-del-placeholder-de-la-foto-persona-136701248.jpg);
+    height: 400px;
+    width: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.contenido{
+    height: 400px;
+    width: 300px;
+    margin-top: 40px;
+}
+.texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}

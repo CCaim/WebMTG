@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<head th:insert="librerias::librerias">
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<div th:insert="top::top"></div>
+		</header>
+		<h1>Decks creados</h1>
+		<!--Imprimer tabla pedidos -->
+		<table class="table table-hover">
+			<thead class="table-dark bg-info text-white">
+				<tr>
+					<th>Id</th>
+					<th>Nombre usuario</th>
+					<th>Nombre del deck</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<!--El meollo-->
+
+				<tr th:if="${listarDecks.empty}">
+					<td colspan="2">No hay decks</td>
+					<div class="col-2 float-right">
+						<div class="p-5">
+						</div>
+					</div>
+
+				</tr>
+
+				<tr th:each="deck:${listarDecks}">
+					<td>
+						<a th:href="@{/decks/{id}(id=${deck.id})}" class="btn btn-primary btn-sm">
+							<span th:text="${deck.getId()}"></span>
+						</a>
+					</td>
+					<td>
+						<span th:text="${deck.getUsuario().getNombre()}"></span>
+					</td>
+					<td>
+						<span th:text="${deck.getNombre()}"></span>
+					</td>
+
+					<div class="modal fade" id="crearMensaje">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+
+									<h4 class="modal-title" id="exampleModalLabel">Crear Deck</h4>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">x</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p class="error-text">Crear nuevo deck:
+									</p>
+
+									<form action="#" th:action="@{/decks/add}" th:object="${deckNuevo}" method="post">
+										<p class="error-text">Introduce el nombre del deck:
+											<input type="text" th:field="*{nombre}" class="form-control"
+												id="exampleInputEmail1"
+												th:attr="placeholder=${deck.getNombre()}"></input>
+										</p>
+										<div class="form-row">
+											<div class="form-group mt-4">
+												<label for="texto">Seleccionar un usuario</label>
+												<select th:field="*{usuario.id}" class="form-control"
+													id="exampleFormControlSelect1">
+													<option th:each="usuario:${listarUsuarios}" th:value="${usuario.id}"
+														th:text="${usuario.nombre}" value="">Selecionar Usuario</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-row">
+											<div class="form-group mt-4">
+												<label for="texto">Seleccionar las cartas</label>
+												<select th:field="*{cartas}" multiple="multiple"
+													class="form-control selectpicker" name="cartas" id="cartas">
+													<option th:each="c:${listarCartas}" th:value="${c.id}"
+														th:text="${c.nname}" value="">Selecionar Cartas</option>
+												</select>
+											</div>
+										</div>
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary btn-sm" data-dismiss="modal"
+										aria-hidden="true">Cancelar</button>
+									<input type="submit" value="Crear Deck" class="btn btn-primary float-right" />
+
+								</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="col-2 float-right">
+			<div class="p-5">
+				<button type="button" class="btn btn-primary float-rigth" data-toggle="modal"
+					data-target="#crearMensaje">
+					+ </button>
+			</div>
+		</div>
+		<!-- Create modal -->
+
+
+		<!-- Fin create modal -->
+
+	</div>
+</body>
