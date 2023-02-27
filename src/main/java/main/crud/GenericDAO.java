@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 
 import main.util.JPAUtil;
 
-
+//yo que se
 
 public class GenericDAO<T> {
 	
