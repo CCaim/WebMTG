@@ -5,20 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTGDecks</title>
+    <div th:insert="librerias::librerias"></div>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>
-        <div class= "menu-superior">
-
-            <div class="logo"><a href="/" title="pagina-principal"><img src="/img/Logo.png" alt="" width="100px" height="50px"></a></div>
-            <div class="menu"><a href="/decks" title="pagina-decks">Decks </a></div>
-            <div class="menu"><a href="/usuarios" title="pagina-decks">Usuarios </a></div>
-            <div class="menu"><a href="/login" title="pagina-decks">Login </a></div>
-            
-        </div>
+    
+        <header>
+			<div th:insert="top::top"></div>
+		</header>
         
-    </header>
+    
     <div class="portada-mazos">
         <div class="preview">
             <div class="titulo">DECKS POPULARES</Datag></div>

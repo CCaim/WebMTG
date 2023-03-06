@@ -2,13 +2,19 @@ package main.modelo.dto;
 
 import javax.persistence.Column;
 
+import main.model.Rol;
+
 public class UsuarioDTO {
+
+	private Integer id;
 	
 	private String nombre;
 	
 	private String username;
-
+	
 	private String password;
+
+	private Rol rol;
 
 	public String getUsername() {
 		return username;
@@ -40,6 +46,22 @@ public class UsuarioDTO {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 	
 	

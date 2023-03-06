@@ -29,7 +29,7 @@ public class Main {
 //	
 //		ArrayList<Deck> user = genericDAODeck.listarRegistros("Deck");
 
-		main(args);
+		//main(args);
 		SpringApplication.run(Main.class, args);
 		
 		
