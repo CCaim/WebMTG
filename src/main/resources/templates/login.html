@@ -23,21 +23,7 @@
 				<p>Already an user?</p>
 				<button class="active">Login</button>
 			</div>
-			<div th:if="${param.error}">
-				<p class="alert alert-danger btn-sm m-2">Usuario o contraseña incorrecto </p>
-			</div>
-			<div th:if="${param.exito}">
-				<div class="alert alert-info  ">
-					<p class="">Nuevo usuario registrado, introduce tus nuevas credenciales
-						para iniciar sesión: </p>
-				</div>
-			</div>
-			<div th:if="${param.logout}">
-				<div class="alert alert-info  ">
-					<p class="" href="/">Sesión cerrada correctamente</p>
-				</div>
-			</div>
-
+		
 			<div class="rgstr-btn splits">
 				<p>Don't have an account?</p>
 				<button>Register</button>
@@ -57,21 +43,21 @@
 						<button class="dark">Login</button>
 					</div>
 				</form>
-				<form id="register" tabindex="502" action="#" method="POST" th:action="@{/usuarios/addRegistro}" th:object="${userDTO}">
+				<form id="register" tabindex="502" action="#" method="POST" th:action="@{/usuarios/addRegistro}" th:object="${newUserDTO}">
 					<h3>Register</h3>
 					<div class="form-row m-auto" >
 					    <div class="form-group  mt-4">
 					      <label for="texto">Nick</label>
-					      <input type="text" th:field="*{nombre}"class="form-control" id="exampleInputEmail1"  placeholder="Nombre"/>
+					      <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="Nombre"/>
    							 
 					         </div>
 	                  </div>
 					<div class="uid">
-						<input  type="text" name="" th:field="*{usuario}"class="form-control" id="exampleInputEmail1"  placeholder="Nombre">
+						<input  type="text" name="" class="form-control" id="exampleInputEmail1"  placeholder="Nombre">
 						<label>User Name</label>
 					</div>
 					<div class="password">
-						<input type="password" name="" th:field="*{password}"class="form-control" id="exampleInputEmail1"  placeholder="Password">
+						<input type="password" name=""class="form-control" id="exampleInputEmail1"  placeholder="Password">
 						<label>Password</label>
 					</div>
 					<div class="submit">
