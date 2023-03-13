@@ -15,15 +15,16 @@ public interface UsuarioService extends UserDetailsService{
 	
 	public Usuario insertarUsuario (Usuario user);
 	
-	public void insertarUsuarioDTO (UsuarioDTO userDTO);
+	public Usuario insertarUsuarioDTO (UsuarioDTO userDTO);
 
 	public List<Usuario> listarUsuario();
 	
 	public Usuario obtenerUsuarioPorId (Integer id);
 	
-	public Usuario obtenerUsuarioPorNombre(String nombre);
+	public Usuario obtenerUsuarioPorNombre(String username);
 	
-	public void eliminarUsuario (Usuario user);
+	public void eliminarUsuario (Integer id);
 	
 	public void eliminarUsuarioPorId (Integer id);
+	
 }
