@@ -26,7 +26,6 @@ public class UsuarioServiceImplements implements  UsuarioService {
 
 	@Autowired
 	private UsuarioRepo UsuarioRepo ;
-	private List<Usuario> crudUsuario;
 	
 	//@Autowired
 	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
