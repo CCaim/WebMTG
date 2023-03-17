@@ -7,7 +7,7 @@ import main.model.Rol;
 
 public interface DeckRepo extends JpaRepository<Deck, Integer> {
 
-	public Deck obtenerDeckPorNombre(String nombre);
+	public Deck findByNombre(String nombre);
 
 	
 

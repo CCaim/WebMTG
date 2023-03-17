@@ -50,7 +50,7 @@
 				<ul class="navbar-nav ml-auto">
 
 					<li class="nav-item dropdown no-arrow">
-						<a class="nav-link dropdown-toggle text-gray-600" href="/" role="button">
+						<a  class="nav-link dropdown-toggle text-gray-600" href="/" role="button">
 							<i class="fas fa-home fa-sm fa-fw mr-3 text-gray-600"></i>
 							Inicio
 						</a>
@@ -58,8 +58,8 @@
 
 					<div class="topbar-divider d-none d-sm-block"></div>
 
-					<li class="nav-item dropdown no-arrow">
-						<a class="nav-link dropdown-toggle text-gray-600" href="/usuarios" role="button">
+					<li sec:authorize="isAuthenticated()" class="nav-item dropdown no-arrow">
+						<a sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-link dropdown-toggle text-gray-600" href="/usuarios" role="button">
 							<i class="fas fa-calendar-check fa-sm fa-fw mr-3 text-gray-600"></i>
 							Usuarios
 						</a>

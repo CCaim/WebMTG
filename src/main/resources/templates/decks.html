@@ -16,6 +16,7 @@
 					<th>Id</th>
 					<th>Nombre usuario</th>
 					<th>Nombre del deck</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,7 +44,11 @@
 					<td>
 						<span th:text="${deck.getNombre()}"></span>
 					</td>
-
+					<td>
+						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}" sec:authorize="isAuthenticated()" data-toggle="modal"
+							data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
+					</td>
+		
 					<div class="modal fade" id="crearMensaje">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">

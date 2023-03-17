@@ -26,9 +26,9 @@ public class DeckServiceImplements implements DeckService{
 	}
 
 	@Override
-	public Deck obtenerDeckPorNombre(String nombre) {
+	public Deck findByNombre(String nombre) {
 		// TODO Auto-generated method stub
-		return DeckRepo.obtenerDeckPorNombre(nombre);
+		return DeckRepo.findByNombre(nombre);
 	}
 
 	@Override

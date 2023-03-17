@@ -14,7 +14,7 @@ public class RolServiceImplements implements RolService {
 	private RolRepo rolRepo;
 
 	@Override
-	public Rol obtenerRolPorNombre(String nombre) {
+	public Rol findByNombre(String nombre) {
 		
 	return rolRepo.findByNombre(nombre);
 	}

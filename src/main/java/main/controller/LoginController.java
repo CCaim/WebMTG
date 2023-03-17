@@ -21,6 +21,6 @@ public class LoginController {
 	@PostMapping("/logout")
 	public String editarAlumno(Model model) {
 
-		return "redirect:/login";
+		return "index";
 	}
 }
