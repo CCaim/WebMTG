@@ -32,16 +32,10 @@ public class DeckServiceImplements implements DeckService {
 
 	
 
-	@Override
-	public void eliminarDeckPorId(Integer id) {
-	    // Primero eliminamos los registros relacionados en la tabla decks_cartas
-	    Deck deck = DeckRepo.findById(id).orElseThrow(() -> new RuntimeException("Deck no encontrado"));
-	    deck.getCartas().clear();
-	    DeckRepo.save(deck);
-
-	    // Luego eliminamos el Deck
-	    DeckRepo.deleteById(id);
-	}
+	 @Override
+	    public void eliminarDeckPorId(Integer id) {
+	        DeckRepo.deleteById(id);
+	    }
 
 	@Override
 	public Deck findById(Integer id) {

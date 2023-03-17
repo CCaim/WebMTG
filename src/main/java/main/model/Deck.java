@@ -3,6 +3,7 @@ package main.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,8 +34,9 @@ public class Deck {
 	@JsonIgnore
 	private Usuario usuario;
 
-	@ManyToMany(mappedBy = "decks", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "deck", cascade = CascadeType.ALL)
 	private Set<Carta> cartas;
+
 
 	public Deck() {
 		cartas = new HashSet<Carta>();
