@@ -59,11 +59,6 @@ public class UsuarioServiceImplements implements  UsuarioService {
 
 	
 	
-	@Override
-	public void eliminarUsuarioPorId(Integer id) {
-		//int idInt = (int) id;
-		UsuarioRepo.deleteById(id);
-	}
 	
 	
 	@Override

@@ -10,7 +10,7 @@ public interface DeckService {
 	
 	public List<Deck> listarDeck();
 	
-	public Deck findByNombre (String nombre);
+	public Deck findById (Integer id);
 	
 	public void eliminarDeckPorId(Integer id);
 }

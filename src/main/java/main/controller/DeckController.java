@@ -54,25 +54,24 @@ public class DeckController {
 	public String editarDeck(@PathVariable Integer id, @ModelAttribute("deckEditar") Deck deckEditado,
 			BindingResult bindingresult) {
 
-		Usuario user = userRepo.findById(id).get();
+		Usuario user = userRepo.findById(deckEditado.getUsuario().getId()).get();
 		deckEditado.setUsuario(user);
 
 		Deck deckEditar = deckRepo.findById(id).get();
-		for (Carta card : deckEditar.getCartas()) {
-			if (!deckEditado.getCartas().contains(card)) {
-				card.getDecks().remove(deckEditado);
-			}
-		}
-		for (Carta card : deckEditar.getCartas()) {
-			if (!deckEditado.getCartas().contains(card)) {
-				card.getDecks().add(deckEditar);
-			}
-		}
-		deckRepo.save(deckEditado);
+		deckEditar.getCartas().forEach(card -> card.getDecks().remove(deckEditar));
+
+		deckEditar.setNombre(deckEditado.getNombre());
+
+		deckEditar.setCartas(deckEditado.getCartas());
+
+		deckEditar.getCartas().forEach(card -> card.getDecks().add(deckEditar));
+
+		deckRepo.save(deckEditar);
 		return "redirect:/decks";
 	}
-	@GetMapping("/delete/{id}")
-	String deleteDeck(Model model, @PathVariable Integer id) {
+
+	@PostMapping("/delete/{id}")
+	public String deleteDeck(Model model, @PathVariable Integer id) {
 		
 		deckRepo.deleteById(id);
 		return "redirect:/decks";
@@ -90,7 +89,7 @@ public class DeckController {
 		}
 		deckRepo.save(deckNew);
 		
-		return "redirect:/deck";
+		return "redirect:/decks";
 	}
 	@GetMapping(value= "/{id}")
 	String id(Model model, @PathVariable Integer id) {

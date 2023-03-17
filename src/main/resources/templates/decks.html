@@ -45,10 +45,37 @@
 						<span th:text="${deck.getNombre()}"></span>
 					</td>
 					<td>
-						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}" sec:authorize="isAuthenticated()" data-toggle="modal"
-							data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
+						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}" sec:authorize="isAuthenticated()"
+							data-toggle="modal" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
 					</td>
-		
+
+					<!-- Agrega este modal debajo de tu tabla -->
+					<div class="modal fade" th:id="'modal-delete'+${deck.getId()}" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Confirmar eliminación</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p>¿Estás seguro que deseas eliminar el deck <span
+											th:text="${deck.getNombre()}"></span>?</p>
+								</div>
+								<div class="modal-footer">
+									<form th:action="@{/decks/delete/{id}(id=${deck.getId()})}" method="post">
+										<input type="submit" value="Eliminar" class="btn btn-danger" />
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancelar</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
 					<div class="modal fade" id="crearMensaje">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -63,17 +90,16 @@
 									<p class="error-text">Crear nuevo deck:
 									</p>
 
-									<form action="#" th:action="@{/decks/add}" th:object="${deckNuevo}" method="post">
+									<form action="#" th:action="@{/decks/addncard}" th:object="${deckNuevo}"
+										method="post">
 										<p class="error-text">Introduce el nombre del deck:
-											<input type="text" th:field="*{nombre}" class="form-control"
-												id="exampleInputEmail1"
+											<input type="text" th:field="*{nombre}" class="form-control" id="nombre"
 												th:attr="placeholder=${deck.getNombre()}"></input>
 										</p>
 										<div class="form-row">
 											<div class="form-group mt-4">
 												<label for="texto">Seleccionar un usuario</label>
-												<select th:field="*{usuario.id}" class="form-control"
-													id="exampleFormControlSelect1">
+												<select th:field="*{usuario.id}" class="form-control" id="usuario">
 													<option th:each="usuario:${listarUsuarios}" th:value="${usuario.id}"
 														th:text="${usuario.nombre}" value="">Selecionar Usuario</option>
 												</select>
