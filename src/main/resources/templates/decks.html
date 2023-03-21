@@ -45,7 +45,7 @@
 						<span th:text="${deck.getNombre()}"></span>
 					</td>
 					<td>
-						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}" sec:authorize="isAuthenticated()"
+						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}" sec:authorize="hasAuthority('ROLE_ADMIN')"
 							data-toggle="modal" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
 					</td>
 
