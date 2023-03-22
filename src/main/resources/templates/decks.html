@@ -21,15 +21,16 @@
 					</div>
 				</div>
 			</div>
-			<div th:each="deck:${listarDecks}" class="col-md-6 mb-4">
-				<div class="card">
+			<div th:each="deck:${listarDecks}" class="col-md-3 mb-4" >
+				<div class="card" style="height: 400px;">
 					<div class="card-body">
 						<h5 class="card-title">Deck <span th:text="${deck.getNombre()}"></span></h5>
 						<p class="card-text">Creado por: <span th:text="${deck.getUsuario().getNombre()}"></span></p>
-						<a th:href="@{/decks/{id}(id=${deck.id})}" class="btn btn-primary btn-sm">Ver detalle</a>
+						<a th:href="@{/decks/{id}(id=${deck.id})}" class="btn btn-primary btn-sm d-flex flex-end">Ver detalle</a>
 						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}"
 							sec:authorize="hasAuthority('ROLE_ADMIN')" data-toggle="modal"
-							class="btn btn-danger btn-sm text-white pointer">Borrar</a>
+							class="btn btn-danger btn-sm text-white pointer d-flex flex-end">Borrar</a>
+							
 					</div>
 				</div>
 				<!-- Agrega este modal debajo de tu tarjeta -->
