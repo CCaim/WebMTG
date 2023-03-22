@@ -3,80 +3,60 @@
 <head th:insert="librerias::librerias">
 </head>
 
-<body>
+<body style="background-image: url(https://www.alayna.net/images/gallery/fullsize/mtg/tranquil.jpg);">
 	<div class="container">
 		<header>
 			<div th:insert="top::top"></div>
 		</header>
 		<h1>Decks creados</h1>
-		<!--Imprimer tabla pedidos -->
-		<table class="table table-hover">
-			<thead class="table-dark bg-info text-white">
-				<tr>
-					<th>Id</th>
-					<th>Nombre usuario</th>
-					<th>Nombre del deck</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<!--El meollo-->
-
-				<tr th:if="${listarDecks.empty}">
-					<td colspan="2">No hay decks</td>
-					<div class="col-2 float-right">
-						<div class="p-5">
+		<!--Imprimir tarjetas de decks -->
+		<div class="row">
+			<!--El meollo-->
+			<div th:if="${listarDecks.empty}">
+				<div class="col-md-6 mb-4">
+					<div class="card">
+						<div class="card-body">
+							<p class="card-text">No hay decks</p>
 						</div>
 					</div>
-
-				</tr>
-
-				<tr th:each="deck:${listarDecks}">
-					<td>
-						<a th:href="@{/decks/{id}(id=${deck.id})}" class="btn btn-primary btn-sm">
-							<span th:text="${deck.getId()}"></span>
-						</a>
-					</td>
-					<td>
-						<span th:text="${deck.getUsuario().getNombre()}"></span>
-					</td>
-					<td>
-						<span th:text="${deck.getNombre()}"></span>
-					</td>
-					<td>
-						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}" sec:authorize="hasAuthority('ROLE_ADMIN')"
-							data-toggle="modal" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
-					</td>
-
-					<!-- Agrega este modal debajo de tu tabla -->
-					<div class="modal fade" th:id="'modal-delete'+${deck.getId()}" tabindex="-1" role="dialog"
-						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Confirmar eliminación</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									<p>¿Estás seguro que deseas eliminar el deck <span
-											th:text="${deck.getNombre()}"></span>?</p>
-								</div>
-							<!--	<div class="modal-footer">
-									<form th:action="@{/decks/delete/{id}(id=${deck.getId()})}" method="post">
-										<input type="submit" value="Eliminar" class="btn btn-danger" />
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Cancelar</button>
-									</form>
-								</div> -->
+				</div>
+			</div>
+			<div th:each="deck:${listarDecks}" class="col-md-6 mb-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Deck <span th:text="${deck.getNombre()}"></span></h5>
+						<p class="card-text">Creado por: <span th:text="${deck.getUsuario().getNombre()}"></span></p>
+						<a th:href="@{/decks/{id}(id=${deck.id})}" class="btn btn-primary btn-sm">Ver detalle</a>
+						<a th:attr="data-target='#modal-delete'+ ${deck.getId()}"
+							sec:authorize="hasAuthority('ROLE_ADMIN')" data-toggle="modal"
+							class="btn btn-danger btn-sm text-white pointer">Borrar</a>
+					</div>
+				</div>
+				<!-- Agrega este modal debajo de tu tarjeta -->
+				<div class="modal fade" th:id="'modal-delete'+${deck.getId()}" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Confirmar eliminación</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
+							<div class="modal-body">
+								<p>¿Estás seguro que deseas eliminar el deck <span
+										th:text="${deck.getNombre()}"></span>?</p>
+							</div>
+							<!--	<div class="modal-footer">
+							<form th:action="@{/decks/delete/{id}(id=${deck.getId()})}" method="post">
+								<input type="submit" value="Eliminar" class="btn btn-danger" />
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							</form>
+						</div> -->
 						</div>
 					</div>
-
-
-					<div class="modal fade" id="crearMensaje">
+				</div>
+				<div class="modal fade" id="crearMensaje">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -98,7 +78,7 @@
 										</p>
 										<div class="form-row">
 											<div class="form-group mt-4">
-												<label for="texto">Seleccionar un usuario</label>
+												<label for="texto">Creado por: </label>
 												<select th:field="*{usuario.id}" class="form-control" id="usuario">
 													<option th:each="usuario:${listarUsuarios}" th:value="${usuario.id}"
 														th:text="${usuario.nombre}" value="">Selecionar Usuario</option>
@@ -129,22 +109,14 @@
 						</div>
 
 					</div>
-
-				</tr>
-			</tbody>
-		</table>
-
+			</div>
+		</div>
 		<div class="col-2 float-right">
-			<div class="p-5">
+			<div class="p-5" sec:authorize="isAuthenticated()">
 				<button type="button" class="btn btn-primary float-rigth" data-toggle="modal"
 					data-target="#crearMensaje">
 					+ </button>
 			</div>
 		</div>
-		<!-- Create modal -->
-
-
-		<!-- Fin create modal -->
-
 	</div>
 </body>
