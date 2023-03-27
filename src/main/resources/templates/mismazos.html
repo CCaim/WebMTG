@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head th:insert="librerias::librerias">
+</head>
+
+<body style="background-image: url(https://media.wizards.com/2018/images/daily/Sy6msClCw5.jpg);">
+	<div class="container">
+		<header>
+			<div th:insert="top::top"></div>
+		</header>
+		<h1>Decks creados</h1>
+		<!--Imprimir tarjetas de decks -->
+		<div class="row">
+			<!--El meollo-->
+			<div th:if="${listarDecks.empty}">
+				<div class="col-md-6 mb-4">
+					<div class="card">
+						<div class="card-body">
+							<p class="card-text">No hay decks</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:each="mismazos:${usuarioLogueado.getDecks()}" class="col-md-3 mb-4" >
+				<div class="card" style="height: 400px;">
+					<div class="card-body">
+						<h5 class="card-title">Deck <span th:text="${deck.getNombre()}"></span></h5>
+						<a th:href="@{/decks/{id}(id=${deck.id})}" class="btn btn-primary btn-sm d-flex flex-end">Ver detalle</a>
+						
+							
+					</div>
+				</div>
+
+			</div>
+		</div>
+			</div>
+		</div>
+	</div>
+</body>

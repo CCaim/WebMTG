@@ -79,11 +79,7 @@
 										</p>
 										<div class="form-row">
 											<div class="form-group mt-4">
-												<label for="texto">Creado por: </label>
-												<select th:field="*{usuario.id}" class="form-control" id="usuario">
-													<option th:each="usuario:${listarUsuarios}" th:value="${usuario.id}"
-														th:text="${usuario.nombre}" value="">Selecionar Usuario</option>
-												</select>
+												<label for="texto">Creado por: <p th:text="${usuarioLogueado.getUsername()}"></p></label>
 											</div>
 										</div>
 

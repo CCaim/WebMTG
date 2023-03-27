@@ -3,6 +3,8 @@ package main.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +20,15 @@ import main.crud.UsuarioRepo;
 import main.model.Carta;
 import main.model.Deck;
 import main.model.Usuario;
+import main.servicio.impl.UsuarioServiceImplements;
 
 @RequestMapping("/decks")
 @Controller
 public class DeckController {
-
+	
+	@Autowired
+	UsuarioServiceImplements userDetailsService;
+	
 	@Autowired
 	private DeckRepo deckRepo;
 
@@ -39,11 +45,12 @@ public class DeckController {
 		ArrayList<Deck> misDecks = (ArrayList<Deck>) deckRepo.findAll();
 		ArrayList<Usuario> misUsuarios = (ArrayList<Usuario>) userRepo.findAll();
 		ArrayList<Carta> misCartas = (ArrayList<Carta>) cartaRepo.findAll();
-
+		Usuario UsuLog = new Usuario();
+		
 		model.addAttribute("listarCartas", misCartas);
 		model.addAttribute("listarUsuarios", misUsuarios);
 		model.addAttribute("listarDecks", misDecks);
-
+		model.addAttribute("usuarioLogueado", UsuLog);
 		model.addAttribute("deckEditar", new Deck());
 		model.addAttribute("deckNuevo", new Deck());
 		return "decks";
@@ -79,10 +86,10 @@ public class DeckController {
 	@PostMapping("/addncard")
 	public String editarDeck(@ModelAttribute("deckNuevo") Deck deckNew, BindingResult bindingresult) {
 		
-		Usuario newUser = userRepo.findById(deckNew.getUsuario().getId()).get();
+		Usuario UsuLog = getUsernameUsuarioLogueado();
 		
-		newUser.getDecks().add(deckNew);
-		deckNew.setUsuario(newUser);
+		UsuLog.getDecks().add(deckNew);
+		deckNew.setUsuario(UsuLog);
 		
 		for(Carta card: deckNew.getCartas()) {
 			card.getDecks().add(deckNew);
@@ -110,4 +117,18 @@ public class DeckController {
 		return "deck";
 		
 	}
+	private Usuario getUsernameUsuarioLogueado() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+            
+            Usuario u = userDetailsService.obtenerUsuarioPorNombre(userDetails.getUsername());
+            return u;
+        }
+        
+        return null; // si no se encuentra un usuario logueado
+    }
+	
 }

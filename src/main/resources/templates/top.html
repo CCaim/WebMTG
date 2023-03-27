@@ -72,8 +72,13 @@
 							<i class="fas fa-users fa-sm fa-fw mr-3 text-gray-600"></i>
 							Mazos
 						</a>
+					</li> 
+					<li sec:authorize="isAuthenticated()" class="nav-item dropdown no-arrow">
+						<a class="nav-link dropdown-toggle text-gray-600" href="/mismazos" role="button">
+							<i class="fas fa-users fa-sm fa-fw mr-3 text-gray-600"></i>
+							Mis Mazos
+						</a>
 					</li>
-					
 
 					<div class="topbar-divider d-none d-sm-block"></div>
 					
@@ -83,7 +88,7 @@
 						<a class="nav-link dropdown-toggle text-gray-900" href="#" id="userDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							 
-							 	Hola: <span sec:authentication = "principal.username" /> 
+							 	Hola: <span sec:authentication = "principal.username"/> 
 						    
 						</a>
 						
@@ -95,7 +100,7 @@
 								Contraseña
 							</a>
 
-							<a class="dropdown-item" href="/voluntariado/setEmail">
+							<a class="dropdown-item" href="/mismaz">
 								<i class="fas fa-address-card fa-sm fa-fw mr-3 text-gray-600"></i>
 								Configurar datos contacto
 							</a>

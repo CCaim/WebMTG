@@ -44,6 +44,7 @@ public class UsuarioController {
 		
 		model.addAttribute("editarUsuario", new Usuario());
 		model.addAttribute("nuevoUsuario", new Usuario());
+		model.addAttribute("usuarioLogueado", getUsernameUsuarioLogueado());
 		return "usuarios";
 	}
 
@@ -119,4 +120,18 @@ public class UsuarioController {
     	}
     	return false;
     }
+    private Usuario getUsernameUsuarioLogueado() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+            
+            Usuario u = userDetailsService.obtenerUsuarioPorNombre(userDetails.getUsername());
+            return u;
+        }
+        
+        return null; // si no se encuentra un usuario logueado
+    }
+
 }
