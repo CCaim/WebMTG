@@ -4,8 +4,9 @@ package main.controller;
 	
 
 	import java.util.ArrayList;
+import java.util.List;
 
-	import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.security.core.context.SecurityContextHolder;
 	import org.springframework.security.core.userdetails.UserDetails;
 	import org.springframework.stereotype.Controller;
@@ -23,7 +24,8 @@ package main.controller;
 	import main.model.Carta;
 	import main.model.Deck;
 	import main.model.Usuario;
-	import main.servicio.impl.UsuarioServiceImplements;
+import main.servicio.impl.DeckServiceImplements;
+import main.servicio.impl.UsuarioServiceImplements;
 
 	@RequestMapping("/mismazos")
 	@Controller
@@ -31,7 +33,8 @@ package main.controller;
 		
 		@Autowired
 		UsuarioServiceImplements userDetailsService;
-		
+		@Autowired
+		DeckServiceImplements deckDetailsService;
 		@Autowired
 		private DeckRepo deckRepo;
 
@@ -47,31 +50,20 @@ package main.controller;
 			// Salir a buscar a la BBDD
 			ArrayList<Deck> misDecks = (ArrayList<Deck>) deckRepo.findAll();
 			ArrayList<Carta> misCartas = (ArrayList<Carta>) cartaRepo.findAll();
-			Usuario UsuLog = new Usuario();
+			Usuario UsuLog = getUsernameUsuarioLogueado();
+			List<Deck> DeckLog = getDecksUsuarioLogueado();
+
 			
 			model.addAttribute("listarCartas", misCartas);
 			model.addAttribute("listarDecks", misDecks);
 			model.addAttribute("usuarioLogueado", UsuLog);
+			model.addAttribute("decksLogueado", DeckLog);
 			model.addAttribute("deckEditar", new Deck());
 			model.addAttribute("deckNuevo", new Deck());
-			return "decks";
+			return "mismazos";
 
 		}
-		@PostMapping("/addncard")
-		public String editarDeck(@ModelAttribute("deckNuevo") Deck deckUser, BindingResult bindingresult) {
-			
-			Usuario UsuLog = getUsernameUsuarioLogueado();
-			
-			UsuLog.getDecks();
-			deckUser.setUsuario(UsuLog);
-			
-			for(Carta card: deckUser.getCartas()) {
-				card.getDecks().add(deckUser);
-			}
-			deckRepo.save(deckUser);
-			
-			return "redirect:/mismazos";
-		}
+
 		@GetMapping(value= "/{id}")
 		String id(Model model, @PathVariable Integer id) {
 			
@@ -88,7 +80,7 @@ package main.controller;
 			model.addAttribute("listarCartas" ,misCartas);
 		
 			
-			return "deck";
+			return "mismazos";
 			
 		}
 		private Usuario getUsernameUsuarioLogueado() {
@@ -104,7 +96,14 @@ package main.controller;
 	        
 	        return null; // si no se encuentra un usuario logueado
 	    }
-		
-	}
+		private List<Deck> getDecksUsuarioLogueado() {
+		    Usuario usuarioLogueado = getUsernameUsuarioLogueado();
+		    if (usuarioLogueado != null) {
+		        return deckDetailsService.obtenerDecksPorUsuario(usuarioLogueado);
+		    }
+		    return null;
+		}
 
+	
+		}
 

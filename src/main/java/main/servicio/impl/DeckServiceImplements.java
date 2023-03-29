@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import main.model.Deck;
+import main.model.Usuario;
 import main.servicio.interfaces.DeckService;
 import main.crud.DeckRepo;
 
@@ -46,6 +47,9 @@ public class DeckServiceImplements implements DeckService {
 	        return null;
 	    }
 	}
+	@Override
+    public List<Deck> obtenerDecksPorUsuario(Usuario usuario) {
+        return DeckRepo.findByUsuario(usuario);
 
-
+}
 }
