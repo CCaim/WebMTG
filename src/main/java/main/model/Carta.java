@@ -1,5 +1,6 @@
 package main.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -178,11 +179,8 @@ public class Carta {
 	@Column(name= "nabilityy_tw")
 	private String nabilityy_tw;
 	
-	@ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
-	@JoinTable(name = "decks_cartas", joinColumns = { @JoinColumn(name = "id") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_deck") })
-	@JsonIgnore
-	private Set<Deck> decks;
+	@ManyToMany(mappedBy = "cartas")
+    private Set<Deck> decks;
 	
 	public Carta() {
 		
@@ -193,7 +191,7 @@ public class Carta {
 		this.id = id;
 		nname = nname;
 		Nset = nset;
-		this.decks = decks;
+		this.decks = new HashSet<>();
 	}
 
 

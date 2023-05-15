@@ -3,6 +3,7 @@ package main.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -32,11 +34,14 @@ public class Deck {
 	@JsonIgnore
 	private Usuario usuario;
 
-	@ManyToMany(mappedBy = "decks", fetch = FetchType.EAGER)
-	private Set<Carta> cartas;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "deck_carta",
+        joinColumns = @JoinColumn(name = "deck_id"),
+        inverseJoinColumns = @JoinColumn(name = "carta_id"))
+    private Set<Carta> cartas = new HashSet<>();
 
 	public Deck() {
-		cartas = new HashSet<Carta>();
+		
 	}
 
 	public Deck(Integer id, String nombre, Usuario usuario, Set<Carta> cartas) {
