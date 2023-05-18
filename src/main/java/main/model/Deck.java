@@ -87,4 +87,6 @@ public class Deck {
 		return "Deck [id=" + id + ", nombre=" + nombre + ", usuario=" + usuario + ", cartas=" + cartasDecks + "]";
 	}
 
+	
+
 }

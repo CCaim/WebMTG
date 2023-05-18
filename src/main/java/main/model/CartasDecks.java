@@ -42,7 +42,7 @@ public class CartasDecks {
 		this.carta = carta;
 	}
 
-	public Deck getDeck() {
+	public Deck getDecks() {
 		return deck;
 	}
 

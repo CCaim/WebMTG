@@ -18,6 +18,7 @@ import main.crud.CartaRepo;
 import main.crud.DeckRepo;
 import main.crud.UsuarioRepo;
 import main.model.Carta;
+import main.model.CartasDecks;
 import main.model.Deck;
 import main.model.Usuario;
 import main.servicio.impl.UsuarioServiceImplements;
@@ -59,23 +60,27 @@ public class DeckController {
 
 	@PostMapping("/edit/{id}")
 	public String editarDeck(@PathVariable Integer id, @ModelAttribute("deckEditar") Deck deckEditado,
-			BindingResult bindingresult) {
+	        BindingResult bindingresult) {
 
-		Usuario user = userRepo.findById(deckEditado.getUsuario().getId()).get();
-		deckEditado.setUsuario(user);
+	    Usuario user = userRepo.findById(deckEditado.getUsuario().getId()).get();
+	    deckEditado.setUsuario(user);
 
-		Deck deckEditar = deckRepo.findById(id).get();
-		deckEditar.getCartas().forEach(card -> card.getDecks().remove(deckEditar));
+	    Deck deckEditar = deckRepo.findById(id).get();
 
-		deckEditar.setNombre(deckEditado.getNombre());
+	    // Remover las relaciones anteriores
+	    deckEditar.getCartas().clear();
 
-		deckEditar.setCartas(deckEditado.getCartas());
+	    // Actualizar el nombre del deck
+	    deckEditar.setNombre(deckEditado.getNombre());
 
-		deckEditar.getCartas().forEach(card -> card.getDecks().add(deckEditar));
+	    // Agregar las nuevas relaciones
+	    deckEditar.setCartas(deckEditado.getCartas());
 
-		deckRepo.save(deckEditar);
-		return "redirect:/decks";
+	    deckRepo.save(deckEditar);
+	    return "redirect:/decks";
 	}
+
+
 
 	@PostMapping("/delete/{id}")
 	public String deleteDeck(Model model, @PathVariable Integer id) {
@@ -91,7 +96,7 @@ public class DeckController {
 		UsuLog.getDecks().add(deckNew);
 		deckNew.setUsuario(UsuLog);
 		
-		for(Carta card: deckNew.getCartas()) {
+		for(CartasDecks card: deckNew.getCartas()) {
 			card.getDecks().add(deckNew);
 		}
 		deckRepo.save(deckNew);
