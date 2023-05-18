@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -179,19 +180,19 @@ public class Carta {
 	@Column(name= "nabilityy_tw")
 	private String nabilityy_tw;
 	
-	@ManyToMany(mappedBy = "cartas")
-    private Set<Deck> decks;
+	@OneToMany(mappedBy = "carta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartasDecks> cartasDecks = new HashSet<>();
 	
 	public Carta() {
 		
 	}
 	
-	public Carta(int id, String nname, String nset, Set<Deck> decks) {
+	public Carta(int id, String nname, String nset, Set<CartasDecks> cartasdecks) {
 		super();
 		this.id = id;
 		nname = nname;
 		Nset = nset;
-		this.decks = new HashSet<>();
+		this.cartasDecks = new HashSet<>();
 	}
 
 
@@ -224,12 +225,12 @@ public class Carta {
 		Nset = nset;
 	}
 
-	public Set<Deck> getDecks() {
-		return decks;
+	public Set<CartasDecks> getDecks() {
+		return cartasDecks;
 	}
 
-	public void setDecks(Set<Deck> decks) {
-		this.decks = decks;
+	public void setDecks(Set<CartasDecks> decks) {
+		this.cartasDecks = decks;
 	}
 
 	public String getNtype() {

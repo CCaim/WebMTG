@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,22 +34,20 @@ public class Deck {
 	@JsonIgnore
 	private Usuario usuario;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "deck_carta",
-        joinColumns = @JoinColumn(name = "deck_id"),
-        inverseJoinColumns = @JoinColumn(name = "carta_id"))
-    private Set<Carta> cartas = new HashSet<>();
+	 @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
+	    private Set<CartasDecks> cartasDecks = new HashSet<>();
+
 
 	public Deck() {
 		
 	}
 
-	public Deck(Integer id, String nombre, Usuario usuario, Set<Carta> cartas) {
+	public Deck(Integer id, String nombre, Usuario usuario, Set<CartasDecks> cartasdecks) {
 		
 		this.id = id;
 		this.nombre = nombre;
 		this.usuario = usuario;
-		this.cartas = cartas;
+		this.cartasDecks = cartasdecks;
 	}
 
 	public Integer getId() {
@@ -75,17 +74,17 @@ public class Deck {
 		this.usuario = usuario;
 	}
 
-	public Set<Carta> getCartas() {
-		return cartas;
+	public Set<CartasDecks> getCartas() {
+		return cartasDecks;
 	}
 
-	public void setCartas(Set<Carta> cartas) {
-		this.cartas = cartas;
+	public void setCartas(Set<CartasDecks> cartasdecks) {
+		this.cartasDecks = cartasdecks;
 	}
 
 	@Override
 	public String toString() {
-		return "Deck [id=" + id + ", nombre=" + nombre + ", usuario=" + usuario + ", cartas=" + cartas + "]";
+		return "Deck [id=" + id + ", nombre=" + nombre + ", usuario=" + usuario + ", cartas=" + cartasDecks + "]";
 	}
 
 }
