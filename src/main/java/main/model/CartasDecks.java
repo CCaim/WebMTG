@@ -21,11 +21,16 @@ public class CartasDecks {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("deckId")
     private Deck deck;
-
-    public CartasDecks() {
+    
+    public CartasDecks(Carta carta, Deck deck) {
+		super();
+		this.carta = carta;
+		this.deck = deck;
+	}
+	public CartasDecks() {
         this.id = new CartasDecksId();
     }
-
+   
 	public CartasDecksId getId() {
 		return id;
 	}

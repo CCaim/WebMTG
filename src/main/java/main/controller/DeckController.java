@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import main.model.Carta;
 import main.model.CartasDecks;
 import main.model.Deck;
 import main.model.Usuario;
+import main.modelo.dto.DeckConstDTO;
 import main.servicio.impl.UsuarioServiceImplements;
 
 @RequestMapping("/decks")
@@ -88,21 +90,41 @@ public class DeckController {
 		deckRepo.deleteById(id);
 		return "redirect:/decks";
 	}
-	@PostMapping("/addncard")
-	public String editarDeck(@ModelAttribute("deckNuevo") Deck deckNew, BindingResult bindingresult) {
-		
-		Usuario UsuLog = getUsernameUsuarioLogueado();
-		
-		UsuLog.getDecks().add(deckNew);
-		deckNew.setUsuario(UsuLog);
-		
-		for(CartasDecks card: deckNew.getCartas()) {
-			card.getDecks().add(deckNew);
-		}
-		deckRepo.save(deckNew);
-		
-		return "redirect:/decks";
-	}
+//	@PostMapping("/addncard")
+//	public String editarDeck(@ModelAttribute("deckNuevo") Deck deckNew, BindingResult bindingresult) {
+//		
+//		Usuario UsuLog = getUsernameUsuarioLogueado();
+//		
+//		UsuLog.getDecks().add(deckNew);
+//		deckNew.setUsuario(UsuLog);
+//		
+//		for(CartasDecks card: deckNew.getCartas()) {
+//			card.getDecks().add(deckNew);
+//		}
+//		deckRepo.save(deckNew);
+//		
+//		return "redirect:/decks";
+//	}
+	@PostMapping("/adddeck")
+    public String editarDeck(@ModelAttribute("deckNuevo") DeckConstDTO newDeck,List<Carta> cards, BindingResult bindingresult) {
+        
+        Usuario UsuLog = getUsernameUsuarioLogueado();
+        
+        UsuLog.getDecks().add(newDeck.getDeck());
+        newDeck.getDeck().setUsuario(UsuLog);
+        
+
+        for(Carta card: cards) {
+            CartasDecks cd =  new CartasDecks(card,newDeck.getDeck());
+            card.getDecks().add(cd);
+            newDeck.getCards().add(card);
+        }
+
+    
+        deckRepo.save(newDeck.getDeck());
+        
+        return "redirect:/decks";
+    }
 	@GetMapping(value= "/{id}")
 	String id(Model model, @PathVariable Integer id) {
 		
